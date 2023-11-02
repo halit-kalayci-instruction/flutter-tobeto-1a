@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(home: StartScreen()));
+  runApp(const MaterialApp(home: QuestionScreen()));
 }
 
 // Stateless => Ekranda değişime uğramayacak, UI widget
@@ -29,9 +29,38 @@ class StartScreen extends StatelessWidget {
               onPressed: () {},
               icon: const Icon(Icons.arrow_right_alt),
               label: const Text("Start"),
+              style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.fromLTRB(40, 20, 40, 20)),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// Boilerplate
+
+class QuestionScreen extends StatefulWidget {
+  const QuestionScreen({Key? key}) : super(key: key);
+
+  @override
+  _QuestionState createState() => _QuestionState();
+}
+
+class _QuestionState extends State<QuestionScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Text("Soru 1"),
+          TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.account_balance_sharp),
+              label: const Text("Cevap"))
+        ]),
       ),
     );
   }
