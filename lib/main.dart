@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -50,14 +52,24 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionState extends State<QuestionScreen> {
+  String question = "Soru 1";
+
+  void changeQuestion() {
+    setState(() {
+      question = "Soru 2";
+    }); // değişikliklerin ekrana da yansıtılması için gerekli..
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const Text("Soru 1"),
+          Text(question),
           TextButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                changeQuestion();
+              },
               icon: const Icon(Icons.account_balance_sharp),
               label: const Text("Cevap"))
         ]),
