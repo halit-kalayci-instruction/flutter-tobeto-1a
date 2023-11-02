@@ -11,9 +11,27 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.deepPurpleAccent,
       body: Center(
-        child: Text("Hello World"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/images/quiz-logo.png", width: 250),
+            const Text(
+              "Quiz App",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold),
+            ),
+            OutlinedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.arrow_right_alt),
+              label: const Text("Start"),
+            ),
+          ],
+        ),
       ),
     );
   }
