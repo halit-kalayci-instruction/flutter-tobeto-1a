@@ -28,17 +28,21 @@ class _QuestionState extends State<QuestionScreen> {
     return Scaffold(
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Column(
-            children: [
-              Text(currentQuestion.question),
-              ...currentQuestion.answers.map((answer) {
-                return ElevatedButton(
-                    child: Text(answer),
-                    onPressed: () {
-                      changeQuestion();
-                    });
-              })
-            ],
+          Container(
+            margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(currentQuestion.question),
+                ...currentQuestion.answers.map((answer) {
+                  return ElevatedButton(
+                      child: Text(answer),
+                      onPressed: () {
+                        changeQuestion();
+                      });
+                })
+              ],
+            ),
           )
         ]),
       ),
