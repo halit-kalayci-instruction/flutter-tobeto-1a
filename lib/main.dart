@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:introapp/data/questions.dart';
+import 'package:introapp/models/quiz_question.dart';
 
 void main() {
   runApp(const MaterialApp(home: QuestionScreen()));
@@ -52,36 +54,37 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionState extends State<QuestionScreen> {
-  String question = "Soru 1";
-  List<String> answers = [
-    "Liste Elemanı 1",
-    "Cevap 2",
-    "Cevap 3",
-    "Cevap 4",
-    "Cevap 5"
-  ];
+  int currentQuestionIndex = 0; // O an kaçıncı soruda olduğumu
 
   void changeQuestion() {
     setState(() {
-      question = "Soru 2";
+      if (questions.length - 1 > currentQuestionIndex) currentQuestionIndex++;
     }); // değişikliklerin ekrana da yansıtılması için gerekli..
+    // setState => build fonkisyonunu yeniden çalıştırır.
   }
 
+  // Spread Operator
   @override
   Widget build(BuildContext context) {
+    final currentQuestion = questions[
+        currentQuestionIndex]; // Liste içerisinden o an kaçıncı soruda isek
+    // o indexdeki veriyi al.
+
     return Scaffold(
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(question),
-          ...answers.map((answer) {
-            return ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  answer,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ));
-          })
+          Column(
+            children: [
+              Text(currentQuestion.question),
+              ...currentQuestion.answers.map((answer) {
+                return ElevatedButton(
+                    child: Text(answer),
+                    onPressed: () {
+                      changeQuestion();
+                    });
+              })
+            ],
+          )
         ]),
       ),
     );
