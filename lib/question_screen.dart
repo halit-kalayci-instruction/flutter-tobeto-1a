@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:introapp/data/questions.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({Key? key}) : super(key: key);
+  // required = constructorda ilgili named argument'in verilmeden ilgili classın construct edilmemesini sağlar.
+  // eğer named argument değilse zaten zorunludur
+  const QuestionScreen({Key? key, required this.onChooseAnswer})
+      : super(key: key);
+  final void Function(String answer) onChooseAnswer;
 
   @override
   _QuestionState createState() => _QuestionState();
@@ -11,8 +15,9 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionState extends State<QuestionScreen> {
   int currentQuestionIndex = 0; // O an kaçıncı soruda olduğumu
 
-  void changeQuestion() {
+  void changeQuestion(String answer) {
     setState(() {
+      widget.onChooseAnswer(answer);
       if (questions.length - 1 > currentQuestionIndex) currentQuestionIndex++;
     }); // değişikliklerin ekrana da yansıtılması için gerekli..
     // setState => build fonkisyonunu yeniden çalıştırır.
@@ -38,7 +43,7 @@ class _QuestionState extends State<QuestionScreen> {
                   return ElevatedButton(
                       child: Text(answer),
                       onPressed: () {
-                        changeQuestion();
+                        changeQuestion(answer);
                       });
                 })
               ],
